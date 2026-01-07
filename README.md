@@ -1,0 +1,26 @@
+SELECT 
+    b.booking_id,
+    u.name AS customer_name,
+    v.name AS vehicle_name,
+    b.start_date,
+    b.end_date,
+    b.status,
+    b.total_cost
+FROM bookings b
+JOIN users u 
+    ON b.user_id = u.user_id
+JOIN vehicles v 
+    ON b.vehicle_id = v.vehicle_id;
+SELECT v.vehicle_id, v.name, v.registration_number
+FROM vehicles v
+WHERE NOT EXISTS (
+    SELECT 1
+    FROM bookings b
+    WHERE b.vehicle_id = v.vehicle_id
+);
+select * from vehicle where type='car'
+select count(*) from bookings group by vehicle_id having count(*)>2
+explanation in first query we must join three tables
+in second query we used subquery to fond not exist info
+in third query we use type=car to get all info of vehicle car type
+in last query we used aggregate,having and group by to get the result
